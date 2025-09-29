@@ -45,11 +45,6 @@ Um aplicativo Android simples feito em Java que consome a [The Cat API](https://
 
 ---
 
-## 📸 Capturas de Tela
-
-> *(adicione prints aqui se quiser)*
-
----
 
 ## 🚀 Tecnologias Utilizadas
 
