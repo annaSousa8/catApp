@@ -99,7 +99,7 @@ O usuário pode:
 ## 🖼️ Capturas de Tela
 | Tela Inicial                                  | Lista de Gatos                                 | Tela de Favoritos                       |
 | --------------------------------------------- | ---------------------------------------------- | --------------------------------------- |
-| ![Tela Inicial](screenshots/tela_inicial.png) | ![Lista de Gatos](screenshots/lista_gatos.png) | ![Favoritos](screenshots/favoritos.png) |
+| ![Tela Inicial](screenshots/telaInicial.png) | ![Lista de Gatos](screenshots/lista.png) | ![Favoritos](screenshots/favoritos.png) |
 
 
 
