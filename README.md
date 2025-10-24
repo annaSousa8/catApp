@@ -100,7 +100,7 @@ O usuário pode:
 
 | Tela Inicial                                  | Lista de Gatos                                 | Tela de Favoritos                       |
 | --------------------------------------------- | ---------------------------------------------- | --------------------------------------- |
-| ![Tela Inicial](catApp/tree/master/app/src/main/res/screenshots/tela_inicial.png) | ![Lista de Gatos](catApp/tree/master/app/src/main/res/screenshots/lista_gatos.png) | ![Favoritos](catApp/tree/master/app/src/main/res/screenshots/favoritos.png) |
+| ![Tela Inicial](tree/master/app/src/main/res/screenshots/tela_inicial.png) | ![Lista de Gatos](tree/master/app/src/main/res/screenshots/lista_gatos.png) | ![Favoritos](tree/master/app/src/main/res/screenshots/favoritos.png) |
 
 
 ---
