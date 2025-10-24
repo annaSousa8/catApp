@@ -25,4 +25,11 @@
         android:textSize="18sp"
         android:padding="8dp" />
 
+    <ImageView
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:id="@+id/imgFavorite"
+        android:src="@drawable/star"/>
+
+
 </androidx.appcompat.widget.LinearLayoutCompat>

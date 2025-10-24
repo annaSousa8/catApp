@@ -2,6 +2,8 @@ package com.example.catapp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -16,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -26,7 +29,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class catActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
+    private Adapter adapter;
+    private Button btnVoltar;
+
     ArrayList<Cat> list = new ArrayList<>();
+    private FavoriteManager favoriteManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,16 +46,37 @@ public class catActivity extends AppCompatActivity {
             return insets;
         });
 
+        favoriteManager = new FavoriteManager(this);
+        Set<String> favs = favoriteManager.getFavorites();
+
         Intent intent = getIntent();
         int quantidade = intent.getIntExtra("quantidade", 0);
         recyclerView = findViewById(R.id.recyclerViweCat);
-        Adapter adapter = new Adapter(list);
+
+        adapter = new Adapter(list, favs);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
         recyclerView.addItemDecoration(new DividerItemDecoration(getApplicationContext(), LinearLayout.VERTICAL));
-        recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
+
+        adapter.setOnItemClickListener(new Adapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+
+            }
+
+            @Override
+            public void onItemLongClick(int position) {
+                toggleFavoriteAt(position);
+            }
+
+            @Override
+            public void onFavoriteClick(int position) {
+                toggleFavoriteAt(position);
+            }
+        });
+
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://api.thecatapi.com/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -76,6 +104,29 @@ public class catActivity extends AppCompatActivity {
                 }
             });
         }
+
+        Button btnVoltar = findViewById(R.id.btnVoltar);
+        btnVoltar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+    }
+
+    private void toggleFavoriteAt(int position) {
+        Cat cat = list.get(position);
+        String url = cat.getUrl();
+        if (favoriteManager.isFavorite(url)) {
+            favoriteManager.removeFavorite(url);
+            Toast.makeText(this, "Removido dos favoritos", Toast.LENGTH_SHORT).show();
+        } else {
+            favoriteManager.addFavorite(url);
+            Toast.makeText(this, "Adicionado aos favoritos", Toast.LENGTH_SHORT).show();
+        }
+
+        adapter.updateFavorites(favoriteManager.getFavorites());
 
     }
 

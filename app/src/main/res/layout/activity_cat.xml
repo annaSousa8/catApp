@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".catActivity">
+    tools:context=".catActivity"
+    android:gravity="center">
 
     <TextView
         android:id="@+id/teste"
@@ -16,15 +18,17 @@
         android:text="Aqui estão seus gatinhos!"
         android:textSize="32sp"
         android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@id/recyclerViweCat"
-        app:layout_constraintTop_toTopOf="parent" />
+        />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViweCat"
-        android:layout_width="409dp"
-        android:layout_height="729dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/teste" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_width="412dp"
+        android:layout_height="451dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Voltar"
+        android:id="@+id/btnVoltar"
+        />
+</androidx.appcompat.widget.LinearLayoutCompat>

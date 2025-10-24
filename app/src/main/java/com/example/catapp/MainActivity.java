@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Button btnDescobrir;
     private EditText editText;
+    private Button btnFavoritos;
 
 
     @SuppressLint("MissingInflatedId")
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
         btnDescobrir = findViewById(R.id.button);
         editText = findViewById(R.id.edtQntd);
+        btnFavoritos = findViewById(R.id.btnFavoritos);
 
         btnDescobrir.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -40,6 +42,15 @@ public class MainActivity extends AppCompatActivity {
                int quantidade = Integer.parseInt(editText.getText().toString());
                 Intent intent = new Intent(getBaseContext(), catActivity.class);
                 intent.putExtra("quantidade", quantidade);
+                startActivity(intent);
+            }
+        });
+
+        Button btnFavoritos = findViewById(R.id.btnFavoritos);
+        btnFavoritos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, FavoritesActivity.class);
                 startActivity(intent);
             }
         });

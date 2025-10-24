@@ -3,7 +3,6 @@ package com.example.catapp;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,19 +12,33 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
+import java.util.Set;
 
 public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
 
     private ArrayList<Cat> list;
     private OnItemClickListener listener;
+    private Set<String> favorites;
 
     public interface OnItemClickListener {
         void onItemClick(int position);
         void onItemLongClick(int position);
+        void onFavoriteClick(int position);
     }
 
-    public Adapter(ArrayList<Cat> list) {
+    public Adapter(ArrayList<Cat> list, Set<String> favorites) {
         this.list = list;
+        this.favorites = favorites;
+    }
+
+    public void updateFavorites(Set<String> newFavorites) {
+        this.favorites = newFavorites;
+        notifyDataSetChanged();
+    }
+
+    public void removeItem(int position) {
+        list.remove(position);
+        notifyItemRemoved(position);
     }
 
     public void setOnItemClickListener(OnItemClickListener listener) {
@@ -49,6 +62,12 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
                 .load(cat.getUrl())
                 .placeholder(R.drawable.kitty)
                 .into(holder.imgCat);
+
+        if (favorites != null && favorites.contains(cat.getUrl())) {
+            holder.imgFavorite.setImageResource(R.drawable.starfilled);
+        } else {
+            holder.imgFavorite.setImageResource(R.drawable.star);
+        }
     }
 
 
@@ -58,6 +77,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder {
+        ImageView imgFavorite = itemView.findViewById(R.id.imgFavorite);
         TextView text2;
         ImageView imgCat;
 
@@ -65,6 +85,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
             super(itemView);
             imgCat = itemView.findViewById(R.id.imgCat);
             text2 = itemView.findViewById(R.id.text2);
+
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -87,6 +108,18 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
                         }
                     }
                     return false;
+                }
+            });
+
+            imgFavorite.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (listener != null) {
+                        int position = getAbsoluteAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION) {
+                            listener.onFavoriteClick(position);
+                        }
+                    }
                 }
             });
         }
