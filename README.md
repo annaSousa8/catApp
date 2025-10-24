@@ -96,6 +96,16 @@ O usuário pode:
 
 ---
 
+## 🖼️ Capturas de Tela
+
+| Tela Inicial                                  | Lista de Gatos                                 | Tela de Favoritos                       |
+| --------------------------------------------- | ---------------------------------------------- | --------------------------------------- |
+| ![Tela Inicial](tree/master/app/src/main/res/screenshots/tela_inicial.png) | ![Lista de Gatos](blob/master/app/src/main/res/screenshots/lista_gatos.png) | ![Favoritos](blob/master/app/src/main/res/screenshots/tela_inicial.png) |
+
+
+---
+
+
 ## 🧠 Tecnologias Utilizadas
 
 | Tecnologia            | Função                           |
